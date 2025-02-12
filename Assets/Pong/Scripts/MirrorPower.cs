@@ -10,6 +10,8 @@ public class MirrorPower : MonoBehaviour
     private string side;
     private string affectedSide;
 
+    public PowerSpawnerRules powerRules;
+
     private float timer = 5f;
     private bool isActive = false;
 
@@ -18,6 +20,11 @@ public class MirrorPower : MonoBehaviour
 
     public Material effect;
     public Material original;
+
+    public int id;
+
+    public AudioClip audioClip_chirp;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -29,6 +36,10 @@ public class MirrorPower : MonoBehaviour
         //material stuff
         leftRend = left.GetComponent<Renderer>();
         rightRend = right.GetComponent<Renderer>();
+
+        powerRules = GameObject.Find("PowerSpawner").GetComponent<PowerSpawnerRules>();
+
+        audioSource = GetComponent<AudioSource>();
 
     }
     void Update()
@@ -66,10 +77,12 @@ public class MirrorPower : MonoBehaviour
     }
     void StartPowerUp()
     {
+        audioSource.clip = audioClip_chirp;
+        audioSource.Play();
         isActive = true;
         if (side.Equals("right"))
         {
-            ll.inputAxis = "Mirror";
+            ll.inputAxis = "MirrorLeft";
             leftRend.material = effect;
 
         }
@@ -96,7 +109,7 @@ public class MirrorPower : MonoBehaviour
             rr.inputAxis = "RightPaddle";
             rightRend.material = original;
         }
-
+        powerRules.changeSpot(false, id);//free location
         this.gameObject.SetActive(false);
     }
 }

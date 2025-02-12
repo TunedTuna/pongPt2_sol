@@ -21,8 +21,9 @@ public class GoalTrigger : MonoBehaviour
         // play noise Goal
         audioSource.clip = audioClip_goal;
         audioSource.Play();
-        
+
         int rand = Random.Range(0, 2);
+        //int rand = 0;
         Debug.Log(rand);
         if (rand == 0)
         {

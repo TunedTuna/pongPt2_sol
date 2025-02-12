@@ -8,6 +8,7 @@ public class IcePower : MonoBehaviour
     public GameObject right;
     public Paddle ll;
     public Paddle rr;
+    public PowerSpawnerRules powerRules;
     private string side;
 
     private float timer = 5f;
@@ -18,6 +19,11 @@ public class IcePower : MonoBehaviour
 
     public Material icy;
     public Material original;
+
+    public int id;
+
+    public AudioClip audioClip_chirp;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -30,6 +36,10 @@ public class IcePower : MonoBehaviour
         //material stuff
         leftRend=left.GetComponent<Renderer>();
         rightRend=right.GetComponent<Renderer>();
+
+        powerRules = GameObject.Find("PowerSpawner").GetComponent<PowerSpawnerRules>();
+        audioSource = GetComponent<AudioSource>();
+
 
 
 
@@ -70,6 +80,8 @@ public class IcePower : MonoBehaviour
     }
     void StartPowerUp()
     {
+        audioSource.clip = audioClip_chirp;
+        audioSource.Play();
         isActive = true;
         if (side.Equals("right"))
         {
@@ -100,7 +112,7 @@ public class IcePower : MonoBehaviour
             rr.speed = 3;
             rightRend.material = original;
         }
-
+        powerRules.changeSpot(false,id);
         this.gameObject.SetActive(false);
     }
 }

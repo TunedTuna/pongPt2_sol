@@ -53,6 +53,14 @@ public class Paddle : MonoBehaviour
         // Debug.Break();
 
         //todo play noise A
+        if (newSign > 0)
+        {
+            Debug.Log("up");
+        }
+        else
+        {
+            Debug.Log("down");
+        }
         audioSrc.clip = clip_a;
         audioSrc.Play();
 
