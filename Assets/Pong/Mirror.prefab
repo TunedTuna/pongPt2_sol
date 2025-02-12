@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3959797647594757994}
   - component: {fileID: 1408669089772871794}
   - component: {fileID: 5451931605214284728}
+  - component: {fileID: -3229669041911555012}
   m_Layer: 0
   m_Name: Mirror
   m_TagString: Untagged
@@ -102,7 +103,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -110,3 +111,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3229669041911555012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156472450178065093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f73cba9b49ed16746aa7e3e69a108761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: {fileID: 0}
+  right: {fileID: 0}
+  ll: {fileID: 0}
+  rr: {fileID: 0}
+  leftRend: {fileID: 0}
+  rightRend: {fileID: 0}
+  effect: {fileID: 2100000, guid: 36a763445015eb9428bff12c2fcbfd1a, type: 2}
+  original: {fileID: 2100000, guid: a2ca17d6ce5b57643a329418c7f586ed, type: 2}

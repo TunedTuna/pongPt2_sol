@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,10 +8,19 @@ public class GameManager : MonoBehaviour
     public float startSpeed = 3f;
     public GoalTrigger leftGoalTrigger;
     public GoalTrigger rightGoalTrigger;
+    public Renderer floor;
+
+    public TextMeshProUGUI leftscore;
+    public TextMeshProUGUI rightscore;
+    public TextMeshProUGUI winner;
+
+    public Material lefty;
+    public Material righty;
 
     int leftPlayerScore;
     int rightPlayerScore;
     Vector3 ballStartPos;
+    
 
     const int scoreToWin = 11;
 
@@ -26,13 +37,23 @@ public class GameManager : MonoBehaviour
     {
         // If the ball entered a goal area, increment the score, check for win, and reset the ball
 
+
         if (trigger == leftGoalTrigger)
         {
             rightPlayerScore++;
             Debug.Log($"Right player scored: {rightPlayerScore}");
+            rightscore.text ="score "+rightPlayerScore.ToString();
+            StartCoroutine(ColorChange(rightscore));
+            floor.material = lefty;
+            
 
             if (rightPlayerScore == scoreToWin)
+            {
+                
                 Debug.Log("Right player wins!");
+                winner.text = "Right player wins!";
+                rightscore.color = Color.yellow;
+            }
             else
                 ResetBall(-1f);
         }
@@ -40,9 +61,18 @@ public class GameManager : MonoBehaviour
         {
             leftPlayerScore++;
             Debug.Log($"Left player scored: {leftPlayerScore}");
+            leftscore.text = "score " + leftPlayerScore.ToString();
+            floor.material = righty;
+           
+            StartCoroutine(ColorChange(leftscore));
 
-            if (rightPlayerScore == scoreToWin)
-                Debug.Log("Right player wins!");
+            if (leftPlayerScore == scoreToWin)
+            {
+                Debug.Log("Left player wins!");
+                leftscore.color = Color.yellow;
+                winner.text = "Left player wins!";
+            }
+                
             else
                 ResetBall(1f);
         }
@@ -64,5 +94,22 @@ public class GameManager : MonoBehaviour
 
         // We are warping the ball to a new location, start the trail over
         ball.GetComponent<TrailRenderer>().Clear();
+    }
+
+    //=============================================================================
+    private IEnumerator ColorChange(TextMeshProUGUI temp)
+    {
+        temp.color = Color.yellow;
+        yield return new WaitForSeconds(1f);
+        float elapsedTime = 0f;
+        float duration = 1f;
+        while (elapsedTime < duration) 
+        { 
+            temp.color=Color.Lerp(Color.yellow,Color.white,elapsedTime/duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        temp.color=Color.white;
+
     }
 }

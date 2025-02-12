@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PowerSpawnerRules : MonoBehaviour
 {
-    public GameObject powerPrefab;
+    public GameObject icePrefab;
+    public GameObject mirrorPrefab;
     public Transform spawnA;
     public Transform spawnB;
     public Transform spawnC;
@@ -10,18 +11,39 @@ public class PowerSpawnerRules : MonoBehaviour
 
     private System.Random random;
     Transform[] locationList;
+    private GameObject power;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        locationList = new Transform[] {spawnA, spawnB, spawnC,spawnD};
-        Transform randomSpawn = locationList[Random.Range(0, locationList.Length)];
-        GameObject newObj = Instantiate(powerPrefab, randomSpawn.position, Quaternion.identity);
-    }
+    private bool spotA=false;
+    private bool spotB=false;
+    private bool spotC = false;
+    private bool spotD = false;
+    
 
-    // Update is called once per frame
+
     void Update()
     {
+       
         
+    }
+    public void spawnPower()
+    {
+        int rand = Random.Range(0, 2);
+        if(rand== 0)
+        {
+            power = icePrefab;
+        }
+        else
+        {
+            power = mirrorPrefab;
+        }
+        locationList = new Transform[] { spawnA, spawnB, spawnC, spawnD };
+        Transform randomSpawn = locationList[Random.Range(0, locationList.Length)];
+        Quaternion spawnRotate = Quaternion.Euler(-90,0,0);
+        GameObject newObj = Instantiate(power, randomSpawn.position, spawnRotate);
+    }
+
+    public void checkSpot(bool temp)
+    {
+
     }
 }

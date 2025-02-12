@@ -125,3 +125,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left: {fileID: 0}
   right: {fileID: 0}
+  ll: {fileID: 0}
+  rr: {fileID: 0}
+  leftRend: {fileID: 0}
+  rightRend: {fileID: 0}
+  icy: {fileID: 2100000, guid: 7aaccb22a54f82a4789ac8c048ac8ffc, type: 2}
+  original: {fileID: 2100000, guid: a2ca17d6ce5b57643a329418c7f586ed, type: 2}

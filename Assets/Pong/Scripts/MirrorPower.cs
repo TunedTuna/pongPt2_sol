@@ -1,38 +1,34 @@
-using System.Net.Security;
 using UnityEngine;
 
-public class IcePower : MonoBehaviour
+public class MirrorPower : MonoBehaviour
 {
-   //figure out what side ur on and change side
+    //figure out what side ur on and change side
     public GameObject left;
     public GameObject right;
     public Paddle ll;
     public Paddle rr;
     private string side;
+    private string affectedSide;
 
     private float timer = 5f;
-    private bool isActive= false;
+    private bool isActive = false;
 
     public Renderer leftRend;
     public Renderer rightRend;
 
-    public Material icy;
+    public Material effect;
     public Material original;
 
     void Start()
     {
-        //GetComponent paddles
         left = GameObject.Find("Left Paddle");
-        ll= left.GetComponent<Paddle>();
+        ll = left.GetComponent<Paddle>();
         right = GameObject.Find("Right Paddle");
-        rr= right.GetComponent<Paddle>();
+        rr = right.GetComponent<Paddle>();
 
         //material stuff
-        leftRend=left.GetComponent<Renderer>();
-        rightRend=right.GetComponent<Renderer>();
-
-
-
+        leftRend = left.GetComponent<Renderer>();
+        rightRend = right.GetComponent<Renderer>();
 
     }
     void Update()
@@ -64,7 +60,7 @@ public class IcePower : MonoBehaviour
 
         StartPowerUp();
         // put out of scene to keep script running
-        transform.position = new Vector3(10,10,10);
+        transform.position = new Vector3(10, 10, 10);
 
 
     }
@@ -73,16 +69,16 @@ public class IcePower : MonoBehaviour
         isActive = true;
         if (side.Equals("right"))
         {
-            ll.speed = ll.speed / 2;
-            leftRend.material = icy;
+            ll.inputAxis = "Mirror";
+            leftRend.material = effect;
 
         }
         else
         {
-            rr.speed = rr.speed / 2;
-            rightRend.material = icy;
+            rr.inputAxis = "Mirror";
+            rightRend.material = effect;
         }
-        
+
     }
 
     void EndPowerUp()
@@ -91,13 +87,13 @@ public class IcePower : MonoBehaviour
         isActive = false;
         if (side.Equals("right"))
         {
-            ll.speed = 3;
+            ll.inputAxis = "LeftPaddle";
             leftRend.material = original;
 
         }
         else
         {
-            rr.speed = 3;
+            rr.inputAxis = "RightPaddle";
             rightRend.material = original;
         }
 
